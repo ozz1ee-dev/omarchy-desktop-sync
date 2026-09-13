@@ -1,0 +1,5 @@
+# omarchy-desktop-sync configuration.
+# This file travels with your dotfiles repo, so the same repo URL is used on every machine.
+
+# The PRIVATE git repo that holds your desktop config.
+DOTFILES_REPO="https://github.com/your-name/my-omarchy-config.git"

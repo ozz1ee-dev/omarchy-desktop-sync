@@ -1,0 +1,56 @@
+# What travels to your other machines. Paths relative to $HOME, one per line.
+#
+# START SMALL and grow. Every line here is something the tool will copy between machines,
+# so add what you actually miss on the second machine instead of your whole $HOME.
+#
+# Text config only. Never add:
+#   .config/hypr/monitors.lua                            -> monitor layout is per machine
+#   .config/omarchy/plugins                              -> one nested git repo per plugin
+#                                                           (gitlinks = empty directories elsewhere)
+#   .config/omarchy/themes                               -> one git repo per theme, plus hundreds of MB
+#   .config/omarchy/{backgrounds,lock-videos,lock-components} -> binaries
+#   anything holding an API key, token or password       -> keep it local, list it in manual.md
+#
+# Exception: a plugin or theme you cloned locally has no git remote, so its files cannot be
+# installed from anywhere. Mark it "# LOCAL <id>" in plugins.txt / themes.txt and track those
+# files here; files marked LOCAL must also appear in this list.
+#
+# This list is the ONLY thing export.sh passes to `yadm add`. Never run a bare `yadm add -A`:
+# in a worktree that is your whole $HOME it would swallow plugin gitlinks and binaries.
+
+# --- Hyprland (keybinds, behaviour) -----------------------------------------
+.config/hypr/bindings.lua
+.config/hypr/hyprland.lua
+.config/hypr/hyprlock.conf
+# .config/hypr/autostart.lua
+# .config/hypr/input.lua
+# .config/hypr/looknfeel.lua
+# .config/hypr/hyprsunset.conf
+
+# --- Omarchy shell state: bar layout, widget order, what is enabled ---------
+.config/omarchy/shell.json
+# .config/omarchy/keystroke.json
+# .config/omarchy/workspace-layout.json
+
+# --- Menu, hooks, branding, plugin settings ---------------------------------
+.config/omarchy/extensions
+.config/omarchy/hooks
+.config/omarchy/branding
+# .config/omarchy/defaults
+# .config/omarchy/omalaunch
+
+# --- Terminals --------------------------------------------------------------
+# .config/kitty/kitty.conf
+# .config/ghostty/config
+
+# --- The tooling itself + the yadm bootstrap hook ---------------------------
+.config/omarchy-desktop
+.config/yadm/bootstrap
+
+# Local plugin/theme clones without a git remote (see "# LOCAL" in the manifests):
+# .config/omarchy/plugins/<your-local-plugin>
+# .config/omarchy/themes/<your-local-theme>
+
+# NOTE: ~/.config/yadm/config is deliberately NOT tracked. It is yadm's own config file, git
+# does not read it (so an excludesFile placed there does nothing), and it also holds
+# machine-local settings (local.class, local.hostname) that a pull must not overwrite.

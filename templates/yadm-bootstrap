@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# yadm runs this file at the end of `yadm clone --bootstrap` (and of `yadm bootstrap`).
+# It is what makes a fresh machine apply the desktop without any extra step:
+# installs missing plugins/themes, applies local patches, applies shell.json, reloads the shell.
+exec "$HOME/.config/omarchy-desktop/bin/import.sh" "$@"

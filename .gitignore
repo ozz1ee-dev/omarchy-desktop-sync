@@ -1,0 +1,6 @@
+# This repo is the tool, not your config. Nothing generated here should be committed.
+*.new
+*.log
+*.tmp
+backups/
+.DS_Store

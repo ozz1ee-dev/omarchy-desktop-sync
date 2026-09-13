@@ -1,0 +1,25 @@
+# Patterns that must NEVER enter your dotfiles repo.
+# This file is the single source of those patterns and is tracked in the repo.
+# core.excludesFile in the yadm REPO config points at it, set by:
+#     yadm gitconfig core.excludesFile ~/.config/omarchy-desktop/.gitignore
+# import.sh sets it on every machine (step 5/6), export.sh before every commit.
+#
+# Do NOT set this with `yadm config core.excludesFile` - that writes yadm's own file
+# (~/.config/yadm/config) which git does NOT read (yadm has no excludesFile handling and
+# does not forward core.* to git). Verified A/B: a fresh *.lock file was not ignored, and
+# after `yadm gitconfig` it is. Test with `yadm check-ignore --no-index -v <file>` on an
+# UNTRACKED file - check-ignore prints nothing for already tracked files, so testing on
+# those proves nothing.
+# export.sh also has a guard that refuses to commit junk regardless of whether the git
+# excludes work on a given machine.
+
+*.lock
+*.bak*
+*.tmp
+*.log
+
+# local backup copies (working copies, they do not travel)
+backups/
+
+# local working notes (durable knowledge belongs in the tooling docs / INVENTORY.md)
+SESSION-STATE.md

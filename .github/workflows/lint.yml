@@ -1,0 +1,44 @@
+name: lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  shell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Syntax check (bash -n)
+        run: |
+          set -e
+          for f in reference/bin/*.sh install.sh templates/yadm-bootstrap; do
+            echo "bash -n $f"
+            bash -n "$f"
+          done
+
+      - name: shellcheck
+        run: |
+          set -e
+          shellcheck --version
+          # Errors only by default so the job is a real gate, not a style nag.
+          # Tighten with -S warning if you want more.
+          shellcheck -S error reference/bin/*.sh install.sh templates/yadm-bootstrap
+
+      - name: Embedded python blocks parse
+        run: |
+          python3 - <<'PY'
+          import ast, glob, re, sys
+          checked = 0
+          for f in sorted(glob.glob("reference/bin/*.sh")):
+              src = open(f, encoding="utf-8").read()
+              for n, body in enumerate(re.findall(r"<<'PY'[^\n]*\n(.*?)\nPY\n", src, re.S), 1):
+                  ast.parse(body)
+                  checked += 1
+                  print(f"{f}: python block {n} parses")
+          if not checked:
+              sys.exit("no embedded python found in bin/*.sh")
+          print(f"ok: {checked} embedded python block(s)")
+          PY
