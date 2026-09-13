@@ -12,6 +12,9 @@
 #   setup-shell.sh --dry-run  show what would happen
 
 set -euo pipefail
+
+# English messages regardless of your locale (git ships its own translations)
+export LC_MESSAGES=C
 BASE="$HOME/.config/omarchy-desktop"
 if [ -f "$BASE/settings" ]; then . "$BASE/settings"; fi
 DOTFILES_REPO="${DOTFILES_REPO:-}"

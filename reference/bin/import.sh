@@ -31,6 +31,9 @@
 # --skip-shell      skips step 5/6 (wiring the omx/omr aliases into the shell rc)
 
 set -uo pipefail
+
+# English messages regardless of your locale (git ships its own translations)
+export LC_MESSAGES=C
 # Deliberately NO `set -e`: this is a convergence script ("deliver as much as you
 # can"), not a transaction. With `set -e` a single error in the plugin step aborted
 # the whole import and the themes (step 3/6) never got installed. Now every step

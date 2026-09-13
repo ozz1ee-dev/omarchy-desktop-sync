@@ -12,6 +12,9 @@
 
 set -euo pipefail
 
+# English messages regardless of your locale (git ships its own translations)
+export LC_MESSAGES=C
+
 DRY_RUN=0; DO_PUSH=1
 for arg in "$@"; do
   case "$arg" in

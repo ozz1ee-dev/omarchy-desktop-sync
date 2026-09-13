@@ -25,6 +25,9 @@
 
 set -euo pipefail
 
+# English messages regardless of your locale (git ships its own translations)
+export LC_MESSAGES=C
+
 SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BASE="$HOME/.config/omarchy-desktop"
 REPO=""

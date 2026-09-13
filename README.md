@@ -221,6 +221,12 @@ Worth knowing: `--themes-only --repair-themes` (reinstall hollow themes), `--res
 before they are moved aside), `--no-push` (commit locally only), `--list-dirty` (why a plugin
 refuses to update).
 
+**Output language:** every message these tools print themselves is English, and each script
+sets `export LC_MESSAGES=C` so that messages coming from `git` stay English on machines with a
+non-English locale (`git` ships its own translations). Delete that line if you would rather see
+your locale's `git` messages. Output that the tools forward verbatim (from `omarchy plugin add`,
+`omarchy theme install`) is English too; `yadm` prints English as well.
+
 ## Configuration
 
 `~/.config/omarchy-desktop/settings` (created by `install.sh`, then carried by your repo):

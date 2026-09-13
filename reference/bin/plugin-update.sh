@@ -22,6 +22,9 @@
 #   plugin-update.sh --dry-run       show the plan, change nothing
 
 set -euo pipefail
+
+# English messages regardless of your locale (git ships its own translations)
+export LC_MESSAGES=C
 PLUGINS="$HOME/.config/omarchy/plugins"
 BASE="$HOME/.config/omarchy-desktop"
 if [ -f "$BASE/settings" ]; then . "$BASE/settings"; fi

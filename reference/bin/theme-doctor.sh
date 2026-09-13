@@ -8,6 +8,9 @@
 # Run it and paste the whole output:  ~/.config/omarchy-desktop/bin/theme-doctor.sh
 
 set -uo pipefail
+
+# English messages regardless of your locale (git ships its own translations)
+export LC_MESSAGES=C
 BASE="$HOME/.config/omarchy-desktop"
 if [ -f "$BASE/settings" ]; then . "$BASE/settings"; fi
 DOTFILES_REPO="${DOTFILES_REPO:-}"
@@ -86,7 +89,7 @@ fi
 hdr "Omarchy/Quickshell log about themes"
 if command -v journalctl >/dev/null 2>&1; then
   journalctl --user -n 0 2>/dev/null >/dev/null || true
-  { journalctl --user --since '-30 min' 2>/dev/null | grep -iE 'theme|motyw' | tail -12; } | sed 's/^/  /' || true
+  { journalctl --user --since '-30 min' 2>/dev/null | grep -iE 'theme' | tail -12; } | sed 's/^/  /' || true
 fi
 
 hdr "what to do next"
